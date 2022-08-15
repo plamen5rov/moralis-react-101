@@ -1,6 +1,7 @@
 import logo from './plamen.jpeg';
 import './App.css';
-import Coin from './components/Coin/Coin'
+import Coin from './components/Coin/Coin';
+
 
 function App() {
   return (
@@ -34,12 +35,13 @@ function App() {
           </tr>
         </thead>
         <tbody>
-          <Coin name="Bitcoin" ticker="BTC" price="$60,000" />
-          <Coin name="Ethereum" ticker="ETH" price="$20,000" />
+          <Coin name="Bitcoin" ticker="BTC" price={60000.99} />
+          <Coin name="Ethereum" ticker="ETH" price={20000.99} />
         </tbody>
       </table>
     </div>
   );
 }
+
 
 export default App;
