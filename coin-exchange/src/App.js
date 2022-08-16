@@ -1,6 +1,7 @@
 import logo from './plamen.jpeg';
 import './App.css';
 import Coin from './components/Coin/Coin';
+import AccountBalance from './components/AccountBalance/AccountBalance';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
 
 
       </header>
+      <AccountBalance amount={10000} />
       <table className='coin-table'>
         <thead>
           <tr>
@@ -35,8 +37,11 @@ function App() {
           </tr>
         </thead>
         <tbody>
-          <Coin name="Bitcoin" ticker="BTC" price={60000.99} />
-          <Coin name="Ethereum" ticker="ETH" price={20000.99} />
+          <Coin name="Bitcoin" ticker="BTC" price={23756.93} />
+          <Coin name="Ethereum" ticker="ETH" price={1875.99} />
+          <Coin name="Tether" ticker="USDT" price={1.00} />
+          <Coin name="Cardano" ticker="ADA" price={0.55} />
+          <Coin name="BNB" ticker="BNB" price={314.78} />
         </tbody>
       </table>
     </div>

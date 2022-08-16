@@ -1,0 +1,7 @@
+.balance {
+    text-align: center;
+    text-transform: capitalize;
+    font-size: large;
+    color: rgb(235, 11, 11);
+    width: 100vh;
+}
