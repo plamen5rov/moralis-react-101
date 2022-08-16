@@ -1,3 +1,4 @@
+import React from 'react';
 import logo from './plamen.jpeg';
 import './App.css';
 import Coin from './components/Coin/Coin';

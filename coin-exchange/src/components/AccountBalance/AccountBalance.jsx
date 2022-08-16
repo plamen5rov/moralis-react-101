@@ -1,11 +1,22 @@
 import React, { Component } from 'react'
-import './AccountBalance.css';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+const Section = styled.section`
+width: auto;
+text-align: center;
+background: palevioletred;
+color: white;
+font-size: 1em;
+margin: 1em;
+padding: 0.25em 1em;
+border: 2px solid palevioletred;
+border-radius: 3px;
+`
 export default class AccountBalance extends Component {
     render() {
         return (
-            <p className='balance'>Balance: ${this.props.amount}</p>
+            <Section>Balance: ${this.props.amount}</Section>
         );
     }
 }

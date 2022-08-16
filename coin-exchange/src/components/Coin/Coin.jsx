@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
-import './Coin.css';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
+
+const TableData = styled.td`
+border: 2px solid rgb(31, 8, 179);
+width: 25vh;
+`;
 
 export default class Coin extends Component {
 
@@ -44,11 +49,11 @@ export default class Coin extends Component {
 
     render() {
         return (
-            <tr className='coin-row'>
-                <td>{this.props.name}</td>
-                <td>{this.props.ticker}</td>
-                <td>${this.state.price}</td>
-                <td><button onClick={this.handleClick}>Refresh</button></td>
+            <tr>
+                <TableData>{this.props.name}</TableData>
+                <TableData>{this.props.ticker}</TableData>
+                <TableData>${this.state.price}</TableData>
+                <TableData><button onClick={this.handleClick}>Refresh</button></TableData>
             </tr>
         )
     }
