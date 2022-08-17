@@ -1,53 +1,53 @@
 import React from 'react';
-import logo from './plamen.jpeg';
 import './App.css';
-import Coin from './components/Coin/Coin';
-import AccountBalance from './components/AccountBalance/AccountBalance';
+import AppHeader from './components/AppHeader';
+import CoinList from './components/CoinList';
+import AccountBalance from './components/AccountBalance';
 
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <div>
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            COIN EXCHANGE APP
-          </p>
-        </div>
-        <div>
-          <a
-            className="App-link"
-            href="https://github.com/plamen5rov"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            My GitHub Profile
-          </a>
-        </div>
-
-
-      </header>
-      <AccountBalance amount={10000} />
-      <table className='coin-table'>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Ticker</th>
-            <th>Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          <Coin name="Bitcoin" ticker="BTC" price={23756.93} />
-          <Coin name="Ethereum" ticker="ETH" price={1875.99} />
-          <Coin name="Tether" ticker="USDT" price={1.00} />
-          <Coin name="Cardano" ticker="ADA" price={0.55} />
-          <Coin name="BNB" ticker="BNB" price={314.78} />
-        </tbody>
-      </table>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      apName: 'Coin Exchange React Project',
+      balance: 10000,
+      coinData: [
+        {
+          name: 'BitCoin',
+          ticker: 'BTC',
+          price: 9999.99,
+        },
+        {
+          name: 'Ethereum',
+          ticker: 'ETH',
+          price: 299.0,
+        },
+        {
+          name: 'Tether',
+          ticker: 'USDT',
+          price: 1.0,
+        },
+        {
+          name: 'Ripple',
+          ticker: 'XRP',
+          price: 0.2,
+        },
+        {
+          name: 'BitCoin Cash',
+          ticker: 'BCH',
+          price: 298.99,
+        }
+      ],
+    };
+  }
+  render() {
+    return (
+      <div className='App'>
+        <AppHeader apName={this.state.apName} />
+        <AccountBalance amount={this.state.balance} />
+        <CoinList coinData={this.state.coinData} />
+      </div>
+    );
+  }
 }
-
 
 export default App;
