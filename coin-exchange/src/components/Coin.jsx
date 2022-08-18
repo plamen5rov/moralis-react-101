@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 const TableData = styled.td`
 border: 1px solid rgb(31, 8, 179);
 width: 25vh;
+font-size: 1.2rem
 `;
 
 export default class Coin extends Component {

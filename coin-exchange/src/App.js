@@ -3,6 +3,9 @@ import './App.css';
 import AppHeader from './components/AppHeader';
 import CoinList from './components/CoinList';
 import AccountBalance from './components/AccountBalance';
+import axios from 'axios';
+
+const COIN_COUNT = 100;
 
 class App extends React.Component {
   constructor(props) {
@@ -11,7 +14,7 @@ class App extends React.Component {
       apName: 'Coin Exchange React Project',
       balance: 10000,
       coinData: [
-        {
+        /*{
           name: 'BitCoin',
           ticker: 'BTC',
           price: 9999.99,
@@ -35,9 +38,27 @@ class App extends React.Component {
           name: 'BitCoin Cash',
           ticker: 'BCH',
           price: 298.99,
-        }
+        }*/
       ],
     };
+
+
+  }
+  componentDidMount = () => {
+    axios.get('https://api.coinpaprika.com/v1/coins')
+      .then(response => {
+        let coinData = response.data.slice(0, COIN_COUNT).map(function (coin) {
+          return {
+            key: coin.id,
+            name: coin.name,
+            ticker: coin.symbol,
+            balance: 0,
+            price: 0
+          }
+        });
+        this.setState({ coinData });
+      });
+
   }
   render() {
     return (
