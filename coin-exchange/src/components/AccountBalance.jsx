@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 const Section = styled.section`
-width: auto;
+width: 28vh;
 text-align: center;
 background: palevioletred;
 color: white;
 font-size: 1em;
-margin: 1em;
+margin: 1rem;
 padding: 0.25em 1em;
 border: 2px solid palevioletred;
 border-radius: 3px;
