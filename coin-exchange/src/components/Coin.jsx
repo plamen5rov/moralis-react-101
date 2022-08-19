@@ -8,6 +8,24 @@ width: 28vh;
 font-size: 1.2rem
 `;
 
+const Button = styled.button`
+    height: 2rem;
+    width: 100%;
+    background-color: #282c34;
+    color: #61dafb;
+    border: none;
+    font-size: 1rem;
+    :active {
+        background: #0053ba;
+    }
+    :hover {
+        border: 1px solid #cccccc;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+`;
+
+
 export default class Coin extends Component {
 
     constructor(props) {
@@ -53,8 +71,13 @@ export default class Coin extends Component {
             <tr>
                 <TableData>{this.props.name}</TableData>
                 <TableData>{this.props.ticker}</TableData>
-                <TableData>${this.state.price}</TableData>
-                <TableData><button onClick={this.handleClick}>Refresh</button></TableData>
+                {this.props.showBalance ? <TableData>{this.props.balance}</TableData> : null}
+                <TableData>${this.props.price}</TableData>
+                <TableData>
+                    <form action="">
+                        <Button onClick={this.handleClick}>Refresh</Button>
+                    </form>
+                </TableData>
             </tr>
         )
     }
