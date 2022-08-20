@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import AppHeader from './components/AppHeader';
 import CoinList from './components/CoinList';
@@ -10,44 +10,16 @@ const coinsUrl = 'https://api.coinpaprika.com/v1/coins';
 const tickerUrl = 'https://api.coinpaprika.com/v1/tickers/';
 
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      apName: 'Coin Exchange React Project',
-      balance: 10000,
-      coinData: [
-        /*{
-          name: 'BitCoin',
-          ticker: 'BTC',
-          price: 9999.99,
-        },
-        {
-          name: 'Ethereum',
-          ticker: 'ETH',
-          price: 299.0,
-        },
-        {
-          name: 'Tether',
-          ticker: 'USDT',
-          price: 1.0,
-        },
-        {
-          name: 'Ripple',
-          ticker: 'XRP',
-          price: 0.2,
-        },
-        {
-          name: 'BitCoin Cash',
-          ticker: 'BCH',
-          price: 298.99,
-        }*/
-      ],
-    };
+function App(props) {
+
+  const appName = "React Project";
+  const [balance, setBalance] = useState(10000);
+  const [showBalance, setShowBalance] = useState(true);
+  const [coinData, setCoinData] = useState([]);
 
 
-  }
-  componentDidMount = async () => {
+
+  const componentDidMount = async () => {
     const response = await axios.get(coinsUrl);
 
     const coinIds = response.data.slice(0, COIN_COUNT).map(coin => coin.id);
@@ -69,12 +41,18 @@ class App extends React.Component {
       }
     });
 
-    this.setState({ coinData: coinPriceData });
+    setCoinData(coinPriceData);
   }
-  handleRefresh = async (valueChangekey) => {
+
+  const handleToggleBalance = () => {
+    setShowBalance(oldValue => !oldValue);
+  }
+
+
+  const handleRefresh = async (valueChangekey) => {
     const keyData = await axios.get(tickerUrl + valueChangekey);
 
-    const newCoinData = this.state.coinData.map(function (values) {
+    const newCoinData = coinData.map(function (values) {
       let newValues = { ...values };
       if (values.key === valueChangekey) {
         newValues.price = parseFloat(Number(keyData.data.quotes["USD"].price).toFixed(2));
@@ -82,31 +60,22 @@ class App extends React.Component {
 
       return newValues;
     });
-    this.setState({ coinData: newCoinData });
-  }
-  handleToggleBalance = () => {
-    this.setState(function (oldState) {
-      return {
-        ...oldState,
-        showBalance: !oldState.showBalance
-      };
-    });
+    setCoinData(newCoinData);
   }
 
 
-  render() {
-    return (
-      <div className='App'>
-        <AppHeader apName={this.state.apName} />
-        <AccountBalance amount={this.state.balance}
-          handleToggleBalance={this.handleToggleBalance}
-          showBalance={this.state.showBalance} />
-        <CoinList coinData={this.state.coinData}
-          handleRefresh={this.handleRefresh}
-          showBalance={this.state.showBalance} />
-      </div>
-    );
-  }
+  return (
+    <div className='App'>
+      <AppHeader apName={appName} />
+      <AccountBalance amount={balance}
+        handleToggleBalance={handleToggleBalance}
+        showBalance={showBalance} />
+      <CoinList coinData={coinData}
+        handleRefresh={handleRefresh}
+        showBalance={showBalance} />
+    </div>
+  );
+
 }
 
 export default App;
