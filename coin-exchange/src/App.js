@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import AppHeader from './components/AppHeader';
 import CoinList from './components/CoinList';
@@ -17,17 +17,10 @@ function App(props) {
   const [showBalance, setShowBalance] = useState(true);
   const [coinData, setCoinData] = useState([]);
 
-
-
   const componentDidMount = async () => {
     const response = await axios.get(coinsUrl);
-
     const coinIds = response.data.slice(0, COIN_COUNT).map(coin => coin.id);
-    //console.log(coinIds);
-
-
     const promises = coinIds.map(id => axios.get(tickerUrl + id));
-
     const coinData = await Promise.all(promises);
 
     const coinPriceData = coinData.map(function (response) {
@@ -44,10 +37,19 @@ function App(props) {
     setCoinData(coinPriceData);
   }
 
+  useEffect(function () {
+    if (coinData.length === 0) {
+      //componentDidMount situation
+      componentDidMount();
+
+    } else {
+      //componentDidUpdate situation
+    }
+  });
+
   const handleToggleBalance = () => {
     setShowBalance(oldValue => !oldValue);
   }
-
 
   const handleRefresh = async (valueChangekey) => {
     const keyData = await axios.get(tickerUrl + valueChangekey);
@@ -62,7 +64,6 @@ function App(props) {
     });
     setCoinData(newCoinData);
   }
-
 
   return (
     <div className='App'>

@@ -12,11 +12,29 @@ margin: 1rem;
 padding: 0.25em 1em;
 border: 2px solid palevioletred;
 border-radius: 3px;
-`
-export default function AccountBalance(props) {
+`;
 
+
+
+export default function AccountBalance(props) {
+    const buttonText = props.showBalance ? 'Hide Balance' : 'Show Balance';
+
+    let content = null;
+
+    if (props.showBalance) {
+
+        content = <>Balance: ${props.amount}</>;
+
+    }
     return (
-        <Section>Balance: ${props.amount}</Section>
+        <Section>
+
+            {content}
+
+            <button onClick={props.handleToggleBalance}>{buttonText}</button>
+
+        </Section>
+
     );
 
 }
