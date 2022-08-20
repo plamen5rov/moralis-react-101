@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
@@ -13,12 +13,12 @@ padding: 0.25em 1em;
 border: 2px solid palevioletred;
 border-radius: 3px;
 `
-export default class AccountBalance extends Component {
-    render() {
-        return (
-            <Section>Balance: ${this.props.amount}</Section>
-        );
-    }
+export default function AccountBalance(props) {
+
+    return (
+        <Section>Balance: ${props.amount}</Section>
+    );
+
 }
 
 

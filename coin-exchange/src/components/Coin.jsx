@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
@@ -26,61 +26,29 @@ const Button = styled.button`
 `;
 
 
-export default class Coin extends Component {
+export default function Coin(props) {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            price: this.props.price
-        }
-        this.handleClick = this.handleClick.bind(this);
-    }
 
-    /* componentDidMount() {
-        const callback = () => {
-            // seting state to a random value
-            const randomPercentage = 0.995 + Math.random() * 0.1;
-
-            this.setState(function (oldState) {
-                return {
-                    price: oldState.price * randomPercentage
-                };
-            });
-        }
-        setInterval(callback, 1000);
-    }
-    */
-    handleClick(event) {
+    const handleClick = (event) => {
         event.preventDefault();
-
-        const callback = () => {
-            // seting state to a random value
-            const randomPercentage = 0.995 + Math.random() * 0.1;
-
-            this.setState(function (oldState) {
-                return {
-                    price: oldState.price * randomPercentage
-                };
-            });
-        }
-        setInterval(callback, 1000);
+        props.handleRefresh(props.tickerId);
     }
 
-    render() {
-        return (
-            <tr>
-                <TableData>{this.props.name}</TableData>
-                <TableData>{this.props.ticker}</TableData>
-                {this.props.showBalance ? <TableData>{this.props.balance}</TableData> : null}
-                <TableData>${this.props.price}</TableData>
-                <TableData>
-                    <form action="">
-                        <Button onClick={this.handleClick}>Refresh</Button>
-                    </form>
-                </TableData>
-            </tr>
-        )
-    }
+
+    return (
+        <tr>
+            <TableData>{props.name}</TableData>
+            <TableData>{props.ticker}</TableData>
+            {props.showBalance ? <TableData>{props.balance}</TableData> : null}
+            <TableData>${props.price}</TableData>
+            <TableData>
+                <form action="">
+                    <Button onClick={handleClick}>Refresh</Button>
+                </form>
+            </TableData>
+        </tr>
+    )
+
 }
 
 Coin.propTypes = {
